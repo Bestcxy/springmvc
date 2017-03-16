@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bestcxx.stu.springmvc.common.util.EnumUtil;
+import com.bestcxx.stu.springmvc.model.AjaxRespnseModel;
 import com.bestcxx.stu.springmvc.model.UserModel;
 import com.bestcxx.stu.springmvc.service.UserService;
 
@@ -49,5 +51,24 @@ public class ParameterController {
 	public UserModel getParameterControllerUserModel(){
 		UserModel u=userService.getAnyUserModel();
 		return u;
+	}
+	
+	@RequestMapping(value="/ajaxCheckUserName",method={RequestMethod.GET,RequestMethod.POST})
+	@ResponseBody
+	public AjaxRespnseModel<String> getCheckUserName(@RequestParam String userName){
+		
+		AjaxRespnseModel<String> a=new AjaxRespnseModel<String>();
+		
+		if("123".endsWith(userName)){
+			//userName 已经存在，不允许提交
+			a.setResult(EnumUtil.AJAX_RESPONSE_STATUS_FALSE.toString());
+			a.setMsg("数据后台已经存在了");
+		}else{
+			//userName 尚未存在，允许提交
+			a.setResult(EnumUtil.AJAX_RESPONSE_STATUS_TRUE.toString());
+			a.setMsg("数据尚未存在");
+		}
+		
+		return a;
 	}
 }

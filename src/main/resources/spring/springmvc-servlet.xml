@@ -33,5 +33,7 @@
     <!-- 配置注解驱动 -->  
     <mvc:annotation-driven/>
     <!-- 处理静态资源 -->  
+    <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
     <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
+    
 </beans>  
