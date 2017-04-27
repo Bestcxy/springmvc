@@ -2,6 +2,7 @@ package com.bestcxx.stu.springmvc.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,16 +59,22 @@ public class ParameterController {
 	public AjaxRespnseModel<String> getCheckUserName(@RequestParam String userName){
 		
 		AjaxRespnseModel<String> a=new AjaxRespnseModel<String>();
-		
-		if("123".endsWith(userName)){
-			//userName 已经存在，不允许提交
-			a.setResult(EnumUtil.AJAX_RESPONSE_STATUS_FALSE.toString());
-			a.setMsg("数据后台已经存在了");
+		if(StringUtils.isNotBlank(userName)){
+			if("123".equals(userName)){
+				//userName 已经存在，不允许提交
+				a.setResult(EnumUtil.AJAX_RESPONSE_STATUS_FALSE.toString());
+				a.setMsg("数据后台已经存在了");
+			}else{
+				//userName 尚未存在，允许提交
+				a.setResult(EnumUtil.AJAX_RESPONSE_STATUS_TRUE.toString());
+				a.setMsg("数据尚未存在");
+			}
 		}else{
-			//userName 尚未存在，允许提交
-			a.setResult(EnumUtil.AJAX_RESPONSE_STATUS_TRUE.toString());
-			a.setMsg("数据尚未存在");
+			//userName 为空
+			a.setResult(EnumUtil.AJAX_RESPONSE_STATUS_FALSE.toString());
+			a.setMsg("提交数据不允许为空");
 		}
+		
 		
 		return a;
 	}
