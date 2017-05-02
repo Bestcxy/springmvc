@@ -7,6 +7,8 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.bestcxx.stu.springmvc.mapper.UserModelMapper;
@@ -20,13 +22,13 @@ import com.bestcxx.stu.springmvc.model.UserModel;
  */
 public class UserModelMapperTest {
 	
-	@Test
-	public void testGetUserModel() {
-		String resource = "mybatis/mybatis-config.xml";
-		InputStream inputStream;
-		SqlSessionFactory sqlSessionFactory = null;
-		SqlSession sqlSession = null;
-		
+	private static String resource = "mybatis/mybatis-config.xml";
+	private static InputStream inputStream;
+	private static SqlSessionFactory sqlSessionFactory = null;
+	private static SqlSession sqlSession = null;
+	
+	@BeforeClass
+	public static void beforeClass(){
 		try {
 			inputStream = Resources.getResourceAsStream(resource);
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
@@ -34,8 +36,36 @@ public class UserModelMapperTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void testAddUserModel(){
 		if(sqlSessionFactory!=null){
-			
+			try {
+				sqlSession = sqlSessionFactory.openSession();
+				//some code
+				UserModelMapper userModelMapper=(UserModelMapper) sqlSession.getMapper(UserModelMapper.class);
+				
+				UserModel u=new UserModel();
+				u.setPassWord("1");
+				u.setUserName("1");
+				
+				int i=userModelMapper.addUserModel(u);
+				sqlSession.commit();
+				System.out.println("i="+i);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				sqlSession.rollback();
+			}
+		}
+	}
+	
+	/**
+	 * 测试搜索功能
+	 */
+	@Test
+	public void testGetUserModel() {
+		if(sqlSessionFactory!=null){
 			try {
 				sqlSession = sqlSessionFactory.openSession();
 				//some code
@@ -49,11 +79,16 @@ public class UserModelMapperTest {
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				sqlSession.rollback();
-			}finally {
-				if(sqlSession!=null){
-					sqlSession.close();
-				}
 			}
+		}
+	}
+	
+	
+	
+	@AfterClass
+	public static void afterClass(){
+		if(sqlSession!=null){
+			sqlSession.close();
 		}
 	}
 }

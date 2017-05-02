@@ -3,9 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bestcxx.stu.springmvc.mapper.UserModelMapper">
-  <select id="getUserModel" resultType="userModel">
+  <select id="getUserModel" resultType="userModel" >
     select * from userModel where userName = #{userName}
   </select>
-  
+  <insert id="addUserModel" parameterType="userModel">
+    insert into userModel (userName,passWord)
+  values (#{userModel.userName},#{userModel.passWord})
+  </insert>
  
 </mapper>
+ 
