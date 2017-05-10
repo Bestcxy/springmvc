@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/task 
+       http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+	<!-- 定时任务执行列表 -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="testTriggerJobTrigger" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 具体定时任务设置 -->
+	<!-- 1、指定类和方法 -->
+	<bean id="testTriggerJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="testTrigger" />
+		<property name="targetMethod" value="TheTriggerMethod" />
+	</bean>
+	<!-- 2、指定运行频率 testTriggerJobTrigger 写到上面 list 中即可 -->
+	<bean id="testTriggerJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="testTriggerJob" />
+		<property name="cronExpression" value="0/30 * * * * ?" /><!-- 每 30 秒执行一次 -->
+	</bean>
+
+
+</beans>
