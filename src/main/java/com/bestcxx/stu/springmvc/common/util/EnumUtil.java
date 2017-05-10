@@ -6,6 +6,7 @@ package com.bestcxx.stu.springmvc.common.util;
  */
 public enum EnumUtil {
 	//可以以逗号间隔  
+	COMMON_DATABASE_PROPERTIES("config/jdbc.properties"),
     AJAX_RESPONSE_STATUS_TRUE("true"),     //ajax方法返回成功状态
     AJAX_RESPONSE_STATUS_FALSE("false");   //ajax方法返回失败状态
       
