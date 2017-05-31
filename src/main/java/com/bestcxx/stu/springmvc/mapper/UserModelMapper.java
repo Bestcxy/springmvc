@@ -10,5 +10,5 @@ import com.bestcxx.stu.springmvc.model.UserModel;
  */
 public interface UserModelMapper {
 	public UserModel getUserModel(@Param("userName") String userName);
-	public int addUserModel(@Param("userModel") UserModel userModel );
+	public int addUserModel(UserModel userModel );//如果启动 mybitas 的属性自识别功能，不要对实体进行@Param("userModel")的设置
 }

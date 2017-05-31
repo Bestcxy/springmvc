@@ -2,6 +2,7 @@ package com.bestcxx.stu.springmvc.mapper;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -47,12 +48,14 @@ public class UserModelMapperTest {
 				UserModelMapper userModelMapper=(UserModelMapper) sqlSession.getMapper(UserModelMapper.class);
 				
 				UserModel u=new UserModel();
-				u.setPassWord("1");
-				u.setUserName("1");
+//				u.setUserName("3");//userName使用数据库自动生成
+				u.setPassWord("3");
+				u.setCreateDate(new Date());
 				
-				int i=userModelMapper.addUserModel(u);
+				userModelMapper.addUserModel(u);
+				
 				sqlSession.commit();
-				System.out.println("i="+i);
+				System.out.println("自动生成的主键为="+u.getUserName());
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				sqlSession.rollback();

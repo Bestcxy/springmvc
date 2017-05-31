@@ -2,6 +2,8 @@ package com.bestcxx.stu.springmvc.model;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 /**
  * 
  * @theme 实体类
@@ -35,6 +37,8 @@ public class UserModel implements Serializable{
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
 	}
+	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public Date getCreateDate() {
 		return createDate;
 	}
