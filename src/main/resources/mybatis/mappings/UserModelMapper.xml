@@ -45,7 +45,17 @@
 	</select>
 	
 	<!-- 搜索多条，返回 List<HashMap<String,Object>>,入参为list-->
-	
+	<select id="getHashMapListByList" parameterType="list" resultType="map">
+		SELECT 
+		<include refid="userModelColumns" />
+		FROM 
+		userModel u
+		WHERE
+		u.userName in 
+		<foreach item="item" collection="userNamelist" open="(" separator="," close=")" >
+		    #{item}
+		 </foreach>
+	</select>
 
 </mapper>
  

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -110,6 +111,36 @@ public class UserModelMapperTest {
 		}
 	}
 	
+	@Test
+	public void testGetHashMapListByList(){
+		if(sqlSessionFactory!=null){
+			try {
+				sqlSession = sqlSessionFactory.openSession();
+				//some code
+				UserModelMapper userModelMapper=(UserModelMapper) sqlSession.getMapper(UserModelMapper.class);
+				ArrayList<String> list=new ArrayList<String>();
+				
+				list.add("2");
+				list.add("3");
+				list.add("4");
+				
+				ArrayList<HashMap<String,Object>> mapList=userModelMapper.getHashMapListByList(list);
+				
+				for(HashMap<String, Object> m:mapList){
+					if(m.get("passWord")!=null){
+						System.out.print(m.get("userName").toString()+";");
+						System.out.print(m.get("passWord").toString()+";");
+						System.out.println(m.get("createDate").toString());
+					}
+					
+				}
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				sqlSession.rollback();
+			}
+		}
+	}
 	
 	@AfterClass
 	public static void afterClass(){
