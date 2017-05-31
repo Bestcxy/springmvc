@@ -2,6 +2,7 @@ package com.bestcxx.stu.springmvc.mapper;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.apache.ibatis.io.Resources;
@@ -86,6 +87,28 @@ public class UserModelMapperTest {
 		}
 	}
 	
+	@Test
+	public void testGetUserModelListByStrs(){
+		if(sqlSessionFactory!=null){
+			try {
+				sqlSession = sqlSessionFactory.openSession();
+				//some code
+				UserModelMapper userModelMapper=(UserModelMapper) sqlSession.getMapper(UserModelMapper.class);
+				
+				ArrayList<UserModel> list=userModelMapper.getUserModelListByStrs("2,3,4");
+				
+				for(UserModel u:list){
+					System.out.print(u.getUserName()+"; ");
+					System.out.print(u.getPassWord()+"; ");
+					System.out.println(u.getCreateDate());
+				}
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				sqlSession.rollback();
+			}
+		}
+	}
 	
 	
 	@AfterClass

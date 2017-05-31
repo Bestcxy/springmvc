@@ -34,9 +34,17 @@
 		)
 	</insert>
 	
-	<!-- 搜索多条，返回List<HashMap<String,Object>>-入参为111,222,333 格式 -->
+	<!-- 搜索多条，返回List<userModel>-入参为111,222,333 格式 -->
+	<select id="getUserModelListByStrs" parameterType="string" resultType="userModel">
+		SELECT 
+		<include refid="userModelColumns" />
+		FROM 
+		userModel u
+		WHERE
+		u.userName in (${userNames})
+	</select>
 	
-	<!-- 搜索多条，返回 List<userModel>,入参为list-->
+	<!-- 搜索多条，返回 List<HashMap<String,Object>>,入参为list-->
 	
 
 </mapper>
