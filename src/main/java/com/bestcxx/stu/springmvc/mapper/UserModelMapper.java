@@ -16,4 +16,5 @@ public interface UserModelMapper {
 	public int addUserModel(UserModel userModel );//如果启动 mybitas 的属性自识别功能，不要对实体进行@Param("userModel")的设置
 	public ArrayList<UserModel> getUserModelListByStrs(@Param("userNames") String userNames);//入参为 11,22,33 形式的字符串，返回实体的list
 	public ArrayList<HashMap<String,Object>> getHashMapListByList(@Param("userNamelist") ArrayList userNamelist);
+	public void update(UserModel userModel);//update方法
 }

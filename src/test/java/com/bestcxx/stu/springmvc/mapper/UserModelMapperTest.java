@@ -142,6 +142,89 @@ public class UserModelMapperTest {
 		}
 	}
 	
+	@Test
+	public void testUpdate(){
+		if(sqlSessionFactory!=null){
+			try {
+				sqlSession = sqlSessionFactory.openSession();
+				//some code
+				UserModelMapper userModelMapper=(UserModelMapper) sqlSession.getMapper(UserModelMapper.class);
+				//先查
+				UserModel u=userModelMapper.getUserModel("106");
+				
+				System.out.println("查出来的：passWord="+u.getPassWord());
+				if(u!=null){
+					u.setPassWord("change");
+					u.setCreateDate(new Date());
+					
+				}
+				userModelMapper.update(u);
+				sqlSession.commit();
+				System.out.println("修改后的：passWord="+u.getPassWord());
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				sqlSession.rollback();
+			}
+		}
+	
+	}
+	
+	//使用for循环测试两次-实验是，第一次新加，第二次更新，然后再新加，看是否报错，前提是知道要新加的id值
+	@Test
+	public void forTwo(){
+		
+		if(sqlSessionFactory!=null){
+			try {
+				sqlSession = sqlSessionFactory.openSession();
+				//some code
+				UserModelMapper userModelMapper=(UserModelMapper) sqlSession.getMapper(UserModelMapper.class);
+				//先查
+				UserModel u=userModelMapper.getUserModel("106");
+				
+				System.out.println("查出来的：passWord="+u.getPassWord());
+				if(u!=null){
+					u.setPassWord("change");
+					u.setCreateDate(new Date());
+					
+				}
+				userModelMapper.update(u);
+				sqlSession.commit();
+				System.out.println("修改后的：passWord="+u.getPassWord());
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				sqlSession.rollback();
+			}
+		}
+		
+		
+		
+	}
+	
+	//检测数据库是否存在 userName=106 的数据
+	@Test
+	public boolean check(){
+		if(sqlSessionFactory!=null){
+			try {
+				sqlSession = sqlSessionFactory.openSession();
+				//some code
+				UserModelMapper userModelMapper=(UserModelMapper) sqlSession.getMapper(UserModelMapper.class);
+				//先查
+				UserModel u=userModelMapper.getUserModel("106");
+				if(u!=null){
+					return true;
+				}
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				sqlSession.rollback();
+			}
+		}
+		return false;
+		
+	}
+	
 	@AfterClass
 	public static void afterClass(){
 		if(sqlSession!=null){

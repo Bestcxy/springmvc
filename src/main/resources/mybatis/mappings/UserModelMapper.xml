@@ -56,6 +56,14 @@
 		    #{item}
 		 </foreach>
 	</select>
+	
+	<update id="update">
+		UPDATE userModel u
+		SET
+		u.passWord=#{passWord},u.createDate=#{createDate}
+		WHERE
+		u.userName=#{userName}
+	</update>
 
 </mapper>
  
