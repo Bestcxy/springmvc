@@ -32,6 +32,7 @@
 		#{passWord},
 		#{createDate}
 		)
+		
 	</insert>
 	
 	<!-- 搜索多条，返回List<userModel>-入参为111,222,333 格式 -->

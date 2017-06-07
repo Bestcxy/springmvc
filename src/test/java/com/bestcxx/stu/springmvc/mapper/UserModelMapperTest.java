@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.bestcxx.stu.springmvc.mapper.UserModelMapper;
@@ -41,7 +42,7 @@ public class UserModelMapperTest {
 		}
 	}
 	
-	@Test
+	@Test 
 	public void testAddUserModel(){
 		if(sqlSessionFactory!=null){
 			try {
@@ -54,9 +55,11 @@ public class UserModelMapperTest {
 				u.setPassWord("3");
 				u.setCreateDate(new Date());
 				
-				userModelMapper.addUserModel(u);
+				int a=userModelMapper.addUserModel(u);
 				
 				sqlSession.commit();
+
+				System.out.println("插入新数据条数="+a);
 				System.out.println("自动生成的主键为="+u.getUserName());
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
@@ -143,6 +146,7 @@ public class UserModelMapperTest {
 	}
 	
 	@Test
+	@Ignore
 	public void testUpdate(){
 		if(sqlSessionFactory!=null){
 			try {
@@ -172,6 +176,7 @@ public class UserModelMapperTest {
 	
 	//使用for循环测试两次-实验是，第一次新加，第二次更新，然后再新加，看是否报错，前提是知道要新加的id值
 	@Test
+	//@Ignore
 	public void forTwo(){
 		
 		if(sqlSessionFactory!=null){
@@ -179,18 +184,45 @@ public class UserModelMapperTest {
 				sqlSession = sqlSessionFactory.openSession();
 				//some code
 				UserModelMapper userModelMapper=(UserModelMapper) sqlSession.getMapper(UserModelMapper.class);
-				//先查
-				UserModel u=userModelMapper.getUserModel("106");
+				//插入新数据
+					
+				UserModel u1=new UserModel();
+				//userName使用数据库自动生成
+				u1.setPassWord("dubboTest");
+				u1.setCreateDate(new Date());
 				
-				System.out.println("查出来的：passWord="+u.getPassWord());
-				if(u!=null){
-					u.setPassWord("change");
-					u.setCreateDate(new Date());
+				int a=userModelMapper.addUserModel(u1);
+				
+				sqlSession.commit();
+
+				System.out.println("插入新数据条数="+a);
+				System.out.println("自动生成的主键为="+u1.getUserName());
+				
+				//再查-需要知道刚才插入的自动生成的主键即userName
+				UserModel u2=userModelMapper.getUserModel(u1.getUserName());
+				
+				System.out.println("查出来的：passWord="+u2.getPassWord());
+				if(u2!=null){
+					u2.setPassWord("dubboTestchange");
+					u2.setCreateDate(new Date());
 					
 				}
-				userModelMapper.update(u);
+				userModelMapper.update(u2);
 				sqlSession.commit();
-				System.out.println("修改后的：passWord="+u.getPassWord());
+				System.out.println("修改后的：passWord="+u2.getPassWord());
+				
+				//再插入
+				UserModel u3=new UserModel();
+				//userName使用数据库自动生成
+				u3.setPassWord("dubboTest2");
+				u3.setCreateDate(new Date());
+				
+				int bNum=userModelMapper.addUserModel(u3);
+				
+				sqlSession.commit();
+
+				System.out.println("插入新数据条数="+bNum);
+				System.out.println("自动生成的主键为="+u3.getUserName());
 				
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
@@ -199,29 +231,6 @@ public class UserModelMapperTest {
 		}
 		
 		
-		
-	}
-	
-	//检测数据库是否存在 userName=106 的数据
-	@Test
-	public boolean check(){
-		if(sqlSessionFactory!=null){
-			try {
-				sqlSession = sqlSessionFactory.openSession();
-				//some code
-				UserModelMapper userModelMapper=(UserModelMapper) sqlSession.getMapper(UserModelMapper.class);
-				//先查
-				UserModel u=userModelMapper.getUserModel("106");
-				if(u!=null){
-					return true;
-				}
-				
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				sqlSession.rollback();
-			}
-		}
-		return false;
 		
 	}
 	
