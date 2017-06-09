@@ -16,8 +16,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<!-- 为实体类定义别名 -->
 	<typeAliases>
 		<typeAlias alias="userModel"  type="com.bestcxx.stu.springmvc.model.UserModel"/>
+		<typeAlias alias="userModelTwo"  type="com.bestcxx.stu.springmvc.model.UserModelTwo"/>
 	</typeAliases>
-	
+	<!-- 使用 spring 配置数据库的时候，下面就可以注释掉了 -->
 	<!-- 定义数据库信息，默认使用 development 数据库构建环境 -->
 	<environments default="development">
 		<environment id="development">
@@ -36,5 +37,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<!-- 定义映射器 -->
 	<mappers>
 		<mapper resource="mybatis/mappings/UserModelMapper.xml"/>
+		<mapper resource="mybatis/mappings/UserModelTwoMapper.xml"/>
 	</mappers>
 </configuration>

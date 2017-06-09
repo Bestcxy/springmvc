@@ -23,8 +23,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表'
 
  */
-public class UserModel implements Serializable{
-	
+public class UserModelTwo implements Serializable{
+
 	private static final long serialVersionUID = -2443619924488167195L;
 	private String userName;
 	private String passWord;
@@ -66,7 +66,6 @@ public class UserModel implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "UserModel[userName="+userName+",passWord="+passWord+",createDate="+createDate+",intNum="+intNum+",decimalNum="+decimalNum+"]";
+		return "UserModelTwo[userName="+userName+",passWord="+passWord+",createDate="+createDate+",intNum="+intNum+",decimalNum="+decimalNum+"]";
 	}
-	
 }

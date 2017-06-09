@@ -2,6 +2,7 @@ package com.bestcxx.stu.springmvc.mapper;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -26,7 +27,7 @@ import com.bestcxx.stu.springmvc.model.UserModel;
  */
 public class UserModelMapperTest {
 	
-	private static String resource = "mybatis/mybatis-config.xml";
+	private static String resource = "mybatis/mybatis-config-noSpring.xml";
 	private static InputStream inputStream;
 	private static SqlSessionFactory sqlSessionFactory = null;
 	private static SqlSession sqlSession = null;
@@ -54,6 +55,8 @@ public class UserModelMapperTest {
 //				u.setUserName("3");//userName使用数据库自动生成
 				u.setPassWord("3");
 				u.setCreateDate(new Date());
+				u.setIntNum(1);
+				u.setDecimalNum(new BigDecimal("0.01"));
 				
 				int a=userModelMapper.addUserModel(u);
 				
@@ -61,6 +64,7 @@ public class UserModelMapperTest {
 
 				System.out.println("插入新数据条数="+a);
 				System.out.println("自动生成的主键为="+u.getUserName());
+				System.out.println("新生成的实体为="+u.toString());
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				sqlSession.rollback();
@@ -79,11 +83,9 @@ public class UserModelMapperTest {
 				//some code
 				UserModelMapper userModelMapper=(UserModelMapper) sqlSession.getMapper(UserModelMapper.class);
 				
-				UserModel u=userModelMapper.getUserModel("1");
+				UserModel u=userModelMapper.getUserModel("758870");
 				
-				System.out.println("userName="+u.getUserName());
-				System.out.println("passWord="+u.getPassWord());
-				
+				System.out.println("查询到的实体="+u.toString());
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				sqlSession.rollback();
@@ -102,9 +104,7 @@ public class UserModelMapperTest {
 				ArrayList<UserModel> list=userModelMapper.getUserModelListByStrs("2,3,4");
 				
 				for(UserModel u:list){
-					System.out.print(u.getUserName()+"; ");
-					System.out.print(u.getPassWord()+"; ");
-					System.out.println(u.getCreateDate());
+					System.out.println(u.toString());
 				}
 				
 			} catch (Exception e) {
@@ -131,9 +131,8 @@ public class UserModelMapperTest {
 				
 				for(HashMap<String, Object> m:mapList){
 					if(m.get("passWord")!=null){
-						System.out.print(m.get("userName").toString()+";");
-						System.out.print(m.get("passWord").toString()+";");
-						System.out.println(m.get("createDate").toString());
+						
+						System.out.println(m.toString());
 					}
 					
 				}
@@ -160,7 +159,6 @@ public class UserModelMapperTest {
 				if(u!=null){
 					u.setPassWord("change");
 					u.setCreateDate(new Date());
-					
 				}
 				userModelMapper.update(u);
 				sqlSession.commit();
@@ -229,10 +227,56 @@ public class UserModelMapperTest {
 				sqlSession.rollback();
 			}
 		}
-		
-		
+	
 		
 	}
+	
+	//循环插入N万条数据，看数据库是否报错
+	@Test
+	public void insertFull(){
+		if(sqlSessionFactory!=null){
+			try {
+				sqlSession = sqlSessionFactory.openSession();
+				//some code
+				UserModelMapper userModelMapper=(UserModelMapper) sqlSession.getMapper(UserModelMapper.class);
+				UserModelTwoMapper userModelTwoMapper=(UserModelTwoMapper) sqlSession.getMapper(UserModelTwoMapper.class);
+				
+				String userNameStr="";
+				for(int i=0;i<1;i++){
+					
+					//增加一个查询
+					if(!"".equals(userNameStr)){
+						//增加一个查询
+						UserModel uS=userModelMapper.getUserModel(userNameStr);
+						System.out.print("查询=="+userNameStr+"  ");
+					}
+					
+					UserModel u=new UserModel();
+//					u.setUserName("3");//userName使用数据库自动生成
+					u.setPassWord("abcdefghijklmnoqrstuvwxyz");
+					u.setCreateDate(new Date());
+					u.setIntNum(100);
+					u.setDecimalNum(new BigDecimal("0.01"));
+					
+					int a=userModelMapper.addUserModel(u);
+					
+					System.out.print("  插入新数据条数="+a);
+					System.out.print("  自动生成的主键为="+u.getUserName());
+					System.out.print("  自动生成的个数为="+u.getPassWord()+"\n");
+					userNameStr=u.getUserName();
+					
+					userModelTwoMapper.insertFromUserModel(u.getUserName());
+				}
+				sqlSession.commit();
+
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				sqlSession.rollback();
+			}
+		}
+	}
+	
 	
 	@AfterClass
 	public static void afterClass(){
