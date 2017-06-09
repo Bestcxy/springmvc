@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bestcxx.stu.springmvc.mapper.UserModelTwoMapper">
+
+	<!-- 表字段显式 -->
+	<sql id="userModelTwoColumns">
+		u.userName AS "userName",
+		u.passWord AS "passWord",
+		u.createDate AS "createDate",
+		u.intNum AS "intNum",
+		u.decimalNum AS "decimalNum"
+	</sql>
+
+
+	<!-- 根据 userName 查询 -->
+	<select id="getUserModel" resultType="userModelTwo">
+		SELECT
+		<include refid="userModelTwoColumns" />
+		FROM
+		userModelTwo u
+		WHERE
+		u.userName = #{userName}
+	</select>
+
+	<!-- 插入 -->
+	<insert id="addUserModel" parameterType="userModelTwo" useGeneratedKeys="true" keyProperty="userName">
+		INSERT INTO userModelTwo (
+		passWord,
+		createDate,
+		intNum,
+		decimalNum
+		)
+		VALUES (
+		#{passWord},
+		#{createDate},
+		#{intNum},
+		#{decimalNum}
+		)
+		
+	</insert>
+	
+	<!-- 搜索多条，返回List<userModel>-入参为111,222,333 格式 -->
+	<select id="getUserModelListByStrs" parameterType="string" resultType="userModelTwo">
+		SELECT 
+		<include refid="userModelTwoColumns" />
+		FROM 
+		userModelTwo u
+		WHERE
+		u.userName in (${userNames})
+	</select>
+	
+	<!-- 搜索多条，返回 List<HashMap<String,Object>>,入参为list-->
+	<select id="getHashMapListByList" parameterType="list" resultType="map">
+		SELECT 
+		<include refid="userModelTwoColumns" />
+		FROM 
+		userModelTwo u
+		WHERE
+		u.userName in 
+		<foreach item="item" collection="userNamelist" open="(" separator="," close=")" >
+		    #{item}
+		 </foreach>
+	</select>
+	
+	<update id="update">
+		UPDATE userModelTwo u
+		SET
+		u.passWord=#{passWord},u.createDate=#{createDate}
+		WHERE
+		u.userName=#{userName}
+	</update>
+	
+	<insert id="insertFromUserModel" parameterType="userModelTwo" useGeneratedKeys="true" keyProperty="userName">
+		INSERT INTO userModelTwo (
+		passWord,
+		createDate,
+		intNum,
+		decimalNum
+		)
+		SELECT 
+		usermodel.passWord,
+		usermodel.createDate,
+		usermodel.intNum,
+		usermodel.decimalNum
+		from usermodel
+		where usermodel.userName=#{userName}
+	</insert>
+
+</mapper>
+ 

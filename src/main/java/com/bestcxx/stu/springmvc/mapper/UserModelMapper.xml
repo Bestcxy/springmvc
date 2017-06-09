@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bestcxx.stu.springmvc.mapper.UserModelMapper">
+
+	<!-- 表字段显式 -->
+	<sql id="userModelColumns">
+		u.userName AS "userName",
+		u.passWord AS "passWord",
+		u.createDate AS "createDate",
+		u.intNum AS "intNum",
+		u.decimalNum AS "decimalNum"
+	</sql>
+
+
+	<!-- 根据 userName 查询 -->
+	<select id="getUserModel" resultType="userModel">
+		SELECT
+		<include refid="userModelColumns" />
+		FROM
+		userModel u
+		WHERE
+		u.userName = #{userName}
+	</select>
+
+	<!-- 插入 -->
+	<insert id="addUserModel" parameterType="userModel" useGeneratedKeys="true" keyProperty="userName">
+		INSERT INTO userModel (
+		passWord,
+		createDate,
+		intNum,
+		decimalNum
+		)
+		VALUES (
+		#{passWord},
+		#{createDate},
+		#{intNum},
+		#{decimalNum}
+		)
+		
+	</insert>
+	
+	<!-- 搜索多条，返回List<userModel>-入参为111,222,333 格式 -->
+	<select id="getUserModelListByStrs" parameterType="string" resultType="userModel">
+		SELECT 
+		<include refid="userModelColumns" />
+		FROM 
+		userModel u
+		WHERE
+		u.userName in (${userNames})
+	</select>
+	
+	<!-- 搜索多条，返回 List<HashMap<String,Object>>,入参为list-->
+	<select id="getHashMapListByList" parameterType="list" resultType="map">
+		SELECT 
+		<include refid="userModelColumns" />
+		FROM 
+		userModel u
+		WHERE
+		u.userName in 
+		<foreach item="item" collection="userNamelist" open="(" separator="," close=")" >
+		    #{item}
+		 </foreach>
+	</select>
+	
+	<update id="update">
+		UPDATE userModel u
+		SET
+		u.passWord=#{passWord},u.createDate=#{createDate}
+		WHERE
+		u.userName=#{userName}
+	</update>
+
+</mapper>
+ 
