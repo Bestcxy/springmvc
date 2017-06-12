@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 
 import com.bestcxx.stu.springmvc.mapper.UserModelMapper;
 import com.bestcxx.stu.springmvc.model.UserModel;
-import com.bestcxx.stu.springmvc.service.UserService;
+import com.bestcxx.stu.springmvc.service.UserModelService;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserModelService {
 
 	@Resource
 	private UserModelMapper userModelMapper;
@@ -18,5 +18,11 @@ public class UserServiceImpl implements UserService {
 		UserModel u=userModelMapper.getUserModel(userName);
 		return u;
 	}
+	@Override
+	public int addUserModel(UserModel userModel) {
+		return userModelMapper.addUserModel(userModel);
+	}
+	
+	
 
 }

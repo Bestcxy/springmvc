@@ -19,10 +19,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!-- 使用下面两个个方法，Mapper.xml 文件位置必须在和其内部 <mapper namespace="">的类在一起，当然，使用注解模式的话，Mapper.xml文件就没有必要存在了 -->
 		
 		<!-- 直接指定一个包去扫描-内保包含多个Mapper配置- -->
-		<!-- <package name="com.bestcxx.stu.springmvc.mapper"/> -->
+		<package name="com.bestcxx.stu.springmvc.mapper"/>
 		
 		<!-- class 级别的指定 -->
-		<mapper class="com.bestcxx.stu.springmvc.mapper.UserModelMapper"/>
-		<mapper class="com.bestcxx.stu.springmvc.mapper.UserModelTwoMapper"/>
+		<!-- <mapper class="com.bestcxx.stu.springmvc.mapper.UserModelMapper"/>
+		<mapper class="com.bestcxx.stu.springmvc.mapper.UserModelTwoMapper"/> -->
 	</mappers>
 </configuration>

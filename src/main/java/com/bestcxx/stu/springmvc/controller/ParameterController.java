@@ -16,13 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bestcxx.stu.springmvc.common.util.EnumUtil;
 import com.bestcxx.stu.springmvc.model.AjaxRespnseModel;
 import com.bestcxx.stu.springmvc.model.UserModel;
-import com.bestcxx.stu.springmvc.service.UserService;
+import com.bestcxx.stu.springmvc.service.UserModelService;
 
 @Controller
 @RequestMapping("/parameterController")
 public class ParameterController {
 	@Autowired
-	private UserService userService;
+	private UserModelService userService;
 	
 	/**
 	 * 测试名称 ： get方法传递参数到后台，再返回前台展示

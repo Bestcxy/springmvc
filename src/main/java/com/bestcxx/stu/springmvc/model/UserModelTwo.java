@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  * DDL 建表语句
  * 
  * 
-	CREATE TABLE `usermodel` (
+	CREATE TABLE `usermodeltwo` (
 	  `userName` int(8) NOT NULL auto_increment,
 	  `passWord` varchar(10000) default NULL,
 	  `createDate` datetime default NULL,
