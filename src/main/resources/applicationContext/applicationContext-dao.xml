@@ -57,9 +57,9 @@
 	</bean>
 	
 	<!-- 手动配置注入-多数据源配置-参考com.bestcxx.stu.springmvc.mapper.UserModelMapperTest 的 SqlSession 来理解-->
-	<!-- <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
-	</bean> -->
+	</bean>
 	
 	<!-- 配置Mapper扫描器 -Spring 自动为 Mapper 注入 sqlSessionFactory--> 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

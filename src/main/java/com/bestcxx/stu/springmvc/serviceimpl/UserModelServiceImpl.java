@@ -9,7 +9,7 @@ import com.bestcxx.stu.springmvc.model.UserModel;
 import com.bestcxx.stu.springmvc.service.UserModelService;
 
 @Service
-public class UserServiceImpl implements UserModelService {
+public class UserModelServiceImpl implements UserModelService {
 
 	@Resource
 	private UserModelMapper userModelMapper;

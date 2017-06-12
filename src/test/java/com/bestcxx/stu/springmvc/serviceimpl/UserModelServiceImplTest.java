@@ -20,7 +20,7 @@ import com.bestcxx.stu.springmvc.service.UserModelService;
 @ContextConfiguration(locations={"classpath:spring/springmvc-servlet.xml"})
 //@TransactionConfiguration(transactionManager = "defaultTransactionManager",defaultRollback=false)//事务管理  
 @Rollback(true)
-public class UserServiceImplTest  extends AbstractTransactionalJUnit4SpringContextTests{
+public class UserModelServiceImplTest  extends AbstractTransactionalJUnit4SpringContextTests{
 	
 	@Autowired
 	private UserModelService userModelService;
