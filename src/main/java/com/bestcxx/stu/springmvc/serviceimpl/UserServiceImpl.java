@@ -15,8 +15,7 @@ public class UserServiceImpl implements UserService {
 	private UserModelMapper userModelMapper;
 	@Override
 	public UserModel getUserModel(String userName) {
-		UserModel u=new UserModel();
-		userModelMapper.getUserModel(userName);
+		UserModel u=userModelMapper.getUserModel(userName);
 		return u;
 	}
 
