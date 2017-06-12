@@ -10,7 +10,7 @@
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
-				<ref bean="testTriggerJobTrigger" />
+				<!-- <ref bean="testTriggerJobTrigger" /> -->
 			</list>
 		</property>
 	</bean>

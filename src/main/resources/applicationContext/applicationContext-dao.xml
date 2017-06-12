@@ -7,17 +7,6 @@
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd  
       ">
-	<!-- 定义受环境影响易变的变量 -->
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
-		<property name="ignoreResourceNotFound" value="true" />
-		<property name="locations">
-			<list>
-				<!-- 数据库配置 -->
-				<value>classpath:config/jdbc.properties</value>
-			</list>
-		</property>
-	</bean>
 	
 	<!-- druid 定义数据源 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
@@ -54,18 +43,27 @@
 
 		<!-- 配置监控统计拦截的filters -->
 		<!-- <property name="filters" value="config,stat,log4j,wall" /> -->
-		<property name="connectionProperties" value="config.decrypt=false" />
+		<!-- <property name="connectionProperties" value="config.decrypt=false" /> -->
 	</bean>
 	
-	<!-- 只读的SessionFactory sqlReadOnlySessionFactory -->
+	<!-- SessionFactory -->
+	<!-- 让spring管理sqlsessionfactory 使用mybatis和spring整合包中的方法 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
 		scope="singleton">
+		<!-- 数据库连接池 -->
 		<property name="dataSource" ref="dataSource" />
+		<!-- 加载mybatis的全局配置文件 -->
 		<property name="configLocation" value="classpath:mybatis/mybatis-config-Spring.xml" />
 	</bean>
 	
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+	<!-- 手动配置注入-多数据源配置-参考com.bestcxx.stu.springmvc.mapper.UserModelMapperTest 的 SqlSession 来理解-->
+	<!-- <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean> -->
+	
+	<!-- 配置Mapper扫描器 -Spring 自动为 Mapper 注入 sqlSessionFactory--> 
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.bestcxx.stu.springmvc.mapper"/>
 	</bean>
 
 </beans>

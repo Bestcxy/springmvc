@@ -50,6 +50,18 @@
 			<value>5242880</value>
 		</property>
 	</bean>
+	
+	<!-- 定义受环境影响易变的变量 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<!-- 数据库常量配置 -->
+				<value>classpath:config/jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
     
     <!-- 加载其他配置文件 -->
     <import resource="classpath:applicationContext/applicationContext-*.xml"/>

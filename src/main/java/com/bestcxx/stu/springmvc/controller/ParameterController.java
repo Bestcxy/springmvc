@@ -53,7 +53,7 @@ public class ParameterController {
 	@RequestMapping(value="/usermodel",method={RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public UserModel getParameterControllerUserModel(){
-		UserModel u=userService.getAnyUserModel();
+		UserModel u=userService.getUserModel("2");
 		return u;
 	}
 	

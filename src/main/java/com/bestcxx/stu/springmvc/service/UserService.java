@@ -5,9 +5,9 @@ import com.bestcxx.stu.springmvc.model.UserModel;
 public interface UserService {
 	
 	/**
-	 * 获取任意一个实体
+	 * 根据userName（主键）获取一个实体
 	 * @return
 	 */
-	public UserModel getAnyUserModel();
+	public UserModel getUserModel(String userName);
 
 }
