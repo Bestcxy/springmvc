@@ -53,15 +53,15 @@
 			value="20" />
 
 		<!-- 配置监控统计拦截的filters -->
-		<property name="filters" value="config,stat,log4j,wall" />
+		<!-- <property name="filters" value="config,stat,log4j,wall" /> -->
 		<property name="connectionProperties" value="config.decrypt=false" />
 	</bean>
 	
 	<!-- 只读的SessionFactory sqlReadOnlySessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
 		scope="singleton">
-		<property name="dataSource" ref="dataSourceRead" />
-		<property name="configLocation" value="WEB-INF/conf/mybatis/mybatis-config.xml" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis/mybatis-config-Spring.xml" />
 	</bean>
 	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">

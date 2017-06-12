@@ -25,11 +25,22 @@
         <property name="suffix" value=".jsp"/>  
     </bean>  
       
-    <!-- 配置注解驱动 -->  
-    <mvc:annotation-driven/>
+    <!-- 配置注解驱动(自动配置注解形式的处理器映射器和处理器适配器)和转化器(conversion-service) -->  
+    <mvc:annotation-driven conversion-service="conversionService"/>
     <!-- 处理静态资源 -->  
     <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
     <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
+    
+    <!-- 时间格式转换器配置 -->
+    <bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<set>
+				<!-- 自定义全局字符串转日期转换器 -->
+				<bean class="com.bestcxx.stu.springmvc.common.util.SpringGlobalStrToDateConverter"/>
+			</set>
+		</property>
+	</bean>
     
     <!-- 文件上传 -->
 	<bean id="multipartResolver"

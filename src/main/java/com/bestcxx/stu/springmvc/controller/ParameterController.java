@@ -1,5 +1,7 @@
 package com.bestcxx.stu.springmvc.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -37,6 +39,7 @@ public class ParameterController {
 		System.out.println(request.getParameter("userName"));
 		//将参数送往前台
 		request.setAttribute("userName", request.getParameter("userName"));
+		request.setAttribute("time", "2017-12-01 11:11:11");
 		return "show";
 	}
 	

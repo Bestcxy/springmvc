@@ -8,6 +8,6 @@
 </head>
 <body>
 	<h1>实验1-get方式传递参数到后台</h1>
-	后台获取到的值为 : ${userName} </br>
+	后台获取到的值为 : ${userName} </br>${time}
 </body>
 </html>
