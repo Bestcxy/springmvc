@@ -33,6 +33,14 @@
             </plugin>  
   
             <!-- jetty插件 -->  
+		    <!-- 在settings.xml 文件中新增 <pluginGroup>org.mortbay.jetty</pluginGroup>	
+		    <pluginGroups>
+		    <pluginGroup
+			     | Specifies a further group identifier to use for plugin lookup.
+			    <pluginGroup>com.your.plugins</pluginGroup>
+			    <pluginGroup>org.mortbay.jetty</pluginGroup>	
+		  	</pluginGroups>
+		  -->
             <plugin>  
                 <groupId>org.mortbay.jetty</groupId>  
                 <artifactId>maven-jetty-plugin</artifactId>  
@@ -59,79 +67,6 @@
     </build>  
    
    <dependencies>  
-        <!-- jetty 配置，测试环境使用 -->  
-        <dependency>  
-            <groupId>org.mortbay.jetty</groupId>  
-            <artifactId>jetty</artifactId>  
-            <version>6.1.26</version>  
-            <scope>test</scope>  
-        </dependency>  
-        <dependency>  
-            <groupId>org.mortbay.jetty</groupId>  
-            <artifactId>jetty-plus</artifactId>  
-            <version>6.1.26</version>  
-            <scope>test</scope>  
-        </dependency>  
-        <dependency>  
-            <groupId>org.mortbay.jetty</groupId>  
-            <artifactId>jetty-naming</artifactId>  
-            <version>6.1.26</version>  
-            <scope>test</scope>  
-        </dependency>  
-        <dependency>  
-            <groupId>org.mortbay.jetty</groupId>  
-            <artifactId>jetty-management</artifactId>  
-            <version>6.1.26</version>  
-            <scope>test</scope>  
-        </dependency>  
-        <dependency>  
-            <groupId>org.mortbay.jetty</groupId>  
-            <artifactId>jsp-2.1-jetty</artifactId>  
-            <version>6.1.26</version>  
-            <scope>test</scope>  
-        </dependency>  
-        <dependency>  
-            <groupId>org.mortbay.jetty</groupId>  
-            <artifactId>jetty-annotations</artifactId>  
-            <version>6.1.26</version>  
-            <scope>test</scope>  
-        </dependency>  
-        <dependency>  
-            <groupId>org.mortbay.jetty</groupId>  
-            <artifactId>start</artifactId>  
-            <version>6.1.26</version>  
-            <scope>test</scope>  
-        </dependency>  
-        <dependency>  
-            <groupId>org.apache.maven</groupId>  
-            <artifactId>maven-project</artifactId>  
-            <version>2.0.3</version>  
-            <scope>test</scope>  
-        </dependency>  
-        <dependency>  
-            <groupId>org.apache.maven</groupId>  
-            <artifactId>maven-plugin-api</artifactId>  
-            <version>2.0.3</version>  
-            <scope>test</scope>  
-        </dependency>  
-        <dependency>  
-            <groupId>org.apache.maven</groupId>  
-            <artifactId>maven-artifact</artifactId>  
-            <version>2.0.3</version>  
-            <scope>test</scope>  
-        </dependency>  
-        <dependency>  
-            <groupId>org.apache.maven</groupId>  
-            <artifactId>maven-plugin-tools-api</artifactId>  
-            <version>2.0</version>  
-            <scope>test</scope>  
-        </dependency>  
-        <dependency>  
-            <groupId>javax.mail</groupId>  
-            <artifactId>mail</artifactId>  
-            <version>1.4.1</version>  
-        </dependency>  
-  
         <!-- junit仅测试环境使用 -->  
         <dependency>  
             <groupId>junit</groupId>  
