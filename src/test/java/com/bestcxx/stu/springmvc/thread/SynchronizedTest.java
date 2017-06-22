@@ -36,7 +36,7 @@ class ThreadTest implements Runnable{
 
 	@Override
 	public void run() {
-		synchronized(ReentrantLockTest.class){
+		synchronized(SynchronizedTest.class){
 			for(int i=0;i<10;i++){
 				System.out.println(System.currentTimeMillis()+" 名字："+Thread.currentThread().getName()+" "+SynchronizedTest.num++);
 			}
