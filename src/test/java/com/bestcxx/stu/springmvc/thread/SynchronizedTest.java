@@ -10,7 +10,7 @@ volatile static int num;
 	//静态 同步方法，注意这里的参数是全局的
 	public static synchronized void method(){
 		for(int i=0;i<10;i++){
-			System.out.println(System.currentTimeMillis()+" 名字："+Thread.currentThread().getName()+" "+ReentrantLockTest.num++);
+			System.out.println(System.currentTimeMillis()+" 名字："+Thread.currentThread().getName()+" "+SynchronizedTest.num++);
 		}
 	}
 
@@ -38,7 +38,7 @@ class ThreadTest implements Runnable{
 	public void run() {
 		synchronized(ReentrantLockTest.class){
 			for(int i=0;i<10;i++){
-				System.out.println(System.currentTimeMillis()+" 名字："+Thread.currentThread().getName()+" "+ReentrantLockTest.num++);
+				System.out.println(System.currentTimeMillis()+" 名字："+Thread.currentThread().getName()+" "+SynchronizedTest.num++);
 			}
 		}
 	}
