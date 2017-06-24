@@ -4,20 +4,25 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-//newSingleThreadScheduledExecutor 可使用 execute,也可使用schedule()，用以在延时固定的时间之后运行
-public class NewScheduledThreadPoolTest {
+public class NewThreadExcecutorTest {
 	static class ThreadTest implements Runnable{
 
 		@Override
 		public void run() {
 			System.out.println(System.currentTimeMillis()+" ThreadName:"+Thread.currentThread().getName()+"开始");
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}	
 	}
 	
 	public static void main(String[] args) {
 		
-		ScheduledExecutorService ses=Executors.newSingleThreadScheduledExecutor();
-		for(int i=0;i<4;i++){
+		ScheduledExecutorService ses=Executors.newScheduledThreadPool(5);
+		for(int i=0;i<10;i++){
 			ses.schedule(new ThreadTest(), 1000, TimeUnit.MILLISECONDS);//固定延时
 			//ses.execute(new  ThreadTest());
 		}
