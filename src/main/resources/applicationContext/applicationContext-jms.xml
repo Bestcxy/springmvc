@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ 	   xmlns:context="http://www.springframework.org/schema/context" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd  
+      ">
+    
+    <!-- Activemq 连接工厂 -->
+    <bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <constructor-arg value="system1" />
+        <constructor-arg value="manager1" />
+        <constructor-arg value="failover:(tcp://localhost:61616)?timeout=2000" />
+    </bean>
+
+    <!-- ConnectionFactory Definition -->
+    <bean id="connectionFactory"
+        class="org.springframework.jms.connection.CachingConnectionFactory">
+        <constructor-arg ref="activeMQConnectionFactory" />
+    </bean>
+
+    <!-- Default Destination Queue Definition -->
+    <!-- 测试配置多个Destination -->
+    <bean id="destination" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg index="0" value="test.activemq.queue" />
+    </bean>
+
+    <!-- JmsTemplate Definition -->
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="defaultDestination" ref="destination" />
+    </bean>
+
+    <!-- Message Sender Definition -->
+    <bean id="messageSender" class="com.bestcxx.stu.springmvc.jms.MessageSender">
+        <constructor-arg index="0" ref="jmsTemplate" />
+        <constructor-arg index="1" ref="destination" />
+    </bean>
+
+    <!-- 消息监听器，主要监听的目的地址 Message Receiver Definition -->
+    <bean id="messageReceiver" class="com.bestcxx.stu.springmvc.jms.MessageReceiver">
+    </bean>
+    <bean class="org.springframework.jms.listener.SimpleMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="destinationName" value="test.activemq.queue" />
+        <property name="messageListener" ref="messageReceiver" />
+    </bean>
+</beans>
