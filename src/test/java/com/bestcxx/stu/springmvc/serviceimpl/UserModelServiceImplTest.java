@@ -1,6 +1,7 @@
 package com.bestcxx.stu.springmvc.serviceimpl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.junit.Test;
@@ -47,6 +48,20 @@ public class UserModelServiceImplTest  extends AbstractTransactionalJUnit4Spring
 		System.out.println(u.toString());
 		
 		
+	}
+	
+	/**
+	 * 查询集合
+	 * @instruction
+	 * @Datetime 2017年6月28日 下午3:45:37
+	 */
+	@Test
+	public void testGetUserModelListByStrs(){
+		ArrayList<UserModel> list=userModelService.getUserModelListByStrs("1,22,3");
+		if(list==null){
+			new Exception();
+		}
+		System.out.println(list.toString());
 	}
 	
 }

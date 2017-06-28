@@ -1,5 +1,7 @@
 package com.bestcxx.stu.springmvc.serviceimpl;
 
+import java.util.ArrayList;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -22,6 +24,16 @@ public class UserModelServiceImpl implements UserModelService {
 	public int addUserModel(UserModel userModel) {
 		return userModelMapper.addUserModel(userModel);
 	}
+	@Override
+	public ArrayList<UserModel> getUserModelListByStrs(String userNames) {
+		ArrayList<UserModel> list=userModelMapper.getUserModelListByStrs(userNames);
+		if(list.size()!=0){//搜索结果不为null,应该使用size判断
+			return list;
+		}
+		return null;
+	}
+	
+	
 	
 	
 

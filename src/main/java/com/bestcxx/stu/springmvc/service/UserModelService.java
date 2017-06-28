@@ -1,5 +1,7 @@
 package com.bestcxx.stu.springmvc.service;
 
+import java.util.ArrayList;
+
 import com.bestcxx.stu.springmvc.model.UserModel;
 
 public interface UserModelService {
@@ -16,5 +18,14 @@ public interface UserModelService {
 	 * @return
 	 */
 	public int addUserModel(UserModel userModel);
+	
+	/**
+	 * 查询集群
+	 * @instruction
+	 * @Datetime 2017年6月28日 下午3:42:08
+	 * @param userNames
+	 * @return
+	 */
+	public ArrayList<UserModel> getUserModelListByStrs(String userNames);
 
 }

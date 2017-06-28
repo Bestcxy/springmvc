@@ -101,7 +101,7 @@ public class UserModelMapperTest {
 				//some code
 				UserModelMapper userModelMapper=(UserModelMapper) sqlSession.getMapper(UserModelMapper.class);
 				
-				ArrayList<UserModel> list=userModelMapper.getUserModelListByStrs("2,3,4");
+				ArrayList<UserModel> list=userModelMapper.getUserModelListByStrs("2,32,42");
 				
 				for(UserModel u:list){
 					System.out.println(u.toString());
