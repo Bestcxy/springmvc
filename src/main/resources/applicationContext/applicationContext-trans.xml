@@ -18,8 +18,8 @@
 	<!-- 通知 -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<!-- 传播行为 -->
-			<tx:method name="add*" propagation="REQUIRED" />
+			<!-- 事物传播行为和隔离级别 -->
+			<tx:method name="add*" propagation="REQUIRED" isolation="READ_COMMITTED"/>
 			<tx:method name="insert*" propagation="REQUIRED" />
 			<tx:method name="delete*" propagation="REQUIRED" />
 			<tx:method name="update*" propagation="REQUIRED" />
