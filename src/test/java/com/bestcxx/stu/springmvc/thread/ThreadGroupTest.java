@@ -28,7 +28,7 @@ public class ThreadGroupTest implements Runnable{
 		System.out.println("线程组及子线程组包含的线程总数的估值:"+threadGroup.activeCount());//线程组及子线程组包含的线程总数的估值
 		System.out.println("包含的子线程组的估值:"+threadGroup.activeGroupCount());//包含的子线程组的估值
 		
-		threadGroup.list();
+		threadGroup.list();//输出线程组结构
 	
 	}
 
@@ -36,7 +36,7 @@ public class ThreadGroupTest implements Runnable{
 	public void run() {
 		try {
 			Thread.sleep(1000);
-			System.out.println(System.currentTimeMillis()+" threadGroup:"+Thread.currentThread().getThreadGroup().getName()+"; Thread:"+Thread.currentThread().getName());
+			//System.out.println(System.currentTimeMillis()+" threadGroup:"+Thread.currentThread().getThreadGroup().getName()+"; Thread:"+Thread.currentThread().getName());
 			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
