@@ -1,7 +1,7 @@
 package com.bestcxx.stu.springmvc.thread;
 
 /**
- * 线程组测试
+ * 线程组测试，线程组可以包含线程组
  * @author WuJieJecket
  *
  */
