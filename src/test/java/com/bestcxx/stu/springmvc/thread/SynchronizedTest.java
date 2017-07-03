@@ -4,6 +4,11 @@ package com.bestcxx.stu.springmvc.thread;
 //对于多线程操作同一个临界区时，被synchronized修饰的类不可被多个线程同时操作
 //synchronized 可以修饰方法，或者变量，也可以在多线程调用中设定
 //使用 static 就是全局性的，否则只对当前对象有作用，别忘了 new Thread(Target) 的构造方法 
+
+//三种使用方式-对象同步、同一个对象的方法同步，静态方法同步
+//synchronized(static 对象/类/this)
+//多个Thread(同一个Runnable 实例化对象)，public void synchronized method();
+//多个Thread(多个Runnable 实例化对象)，public void static synchronized method();
 public class SynchronizedTest {
 volatile static int num;
 
