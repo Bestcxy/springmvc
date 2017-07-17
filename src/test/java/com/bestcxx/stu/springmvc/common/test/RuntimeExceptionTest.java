@@ -2,10 +2,12 @@ package com.bestcxx.stu.springmvc.common.test;
 
 import java.io.IOException;
 
+
 //RuntimeException 继承了 Exception
 //RuntimeException 为运行时异常
 //RuntimeException 以及其子类 都是非受检异常，可以捕获，继续抛出异常、不处理
-//Exception类以及其他异常类则为受检异常，受检异常必须捕获或者继续抛出异常
+//Exception类异常为普通异常,需要处理
+//其他异常类则为受检异常，受检异常必须捕获或者继续抛出异常
 
 //异常的分类
 //Error错误：JVM内部的严重问题。无法恢复。程序人员不用处理。
