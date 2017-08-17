@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"  
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
-    xmlns:context="http://www.springframework.org/schema/context"  
-    xmlns:tx="http://www.springframework.org/schema/tx"  
-    xmlns:aop="http://www.springframework.org/schema/aop"  
-    xmlns:util="http://www.springframework.org/schema/util"  
-    xmlns:orm="http://www.springframework.org/schema/orm"   
-    xmlns:mvc="http://www.springframework.org/schema/mvc"  
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd  
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:orm="http://www.springframework.org/schema/orm"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd  
                         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd  
                         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd  
                         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd  
                         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd  
                         http://www.springframework.org/schema/orm http://www.springframework.org/schema/orm/spring-orm-4.3.xsd  
-                        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">  
-    <!-- 定义默认访问 -->  
-    <mvc:view-controller path="/" view-name="forward:home"/>     
-      
-    <!-- 视图解析器注册bean -jsp视图解析 http://tool.oschina.net/apidocs/apidoc?api=Spring-3.1.1-->  
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>  
-        <property name="contentType" value="text/html"/> 
-        <property name="prefix" value="/WEB-INF/views/"/>  
-        <property name="suffix" value=".jsp"/>  
-    </bean>  
-      
-    <!-- 配置注解驱动(自动配置注解形式的处理器映射器和处理器适配器)和转化器(conversion-service) -->  
-    <mvc:annotation-driven conversion-service="conversionService"/>
-    <!-- 处理静态资源 -->  
-    <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
-    <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
-    
-    <!-- 时间格式转换器配置 -->
-    <bean id="conversionService"
+                        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+	<!-- 定义默认访问 -->
+	<mvc:view-controller path="/" view-name="forward:home" />
+	
+	<!-- 视图解析器注册bean -jsp视图解析 http://tool.oschina.net/apidocs/apidoc?api=Spring-3.1.1 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="contentType" value="text/html" />
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 配置注解驱动(自动配置注解形式的处理器映射器和处理器适配器)和转化器(conversion-service) -->
+	<mvc:annotation-driven conversion-service="conversionService" />
+	<!-- 处理静态资源 -->
+	<mvc:resources location="/WEB-INF/css/" mapping="/css/**" />
+	<mvc:resources location="/WEB-INF/js/" mapping="/js/**" />
+
+	<!-- 时间格式转换器配置 -->
+	<bean id="conversionService"
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="converters">
 			<set>
 				<!-- 自定义全局字符串转日期转换器 -->
-				<bean class="com.bestcxx.stu.springmvc.common.util.SpringGlobalStrToDateConverter"/>
+				<bean
+					class="com.bestcxx.stu.springmvc.common.util.SpringGlobalStrToDateConverter" />
 			</set>
 		</property>
 	</bean>
-    
-    <!-- 文件上传 -->
+
+	<!-- 文件上传 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- 设置上传文件的最大尺寸为5MB -->
@@ -50,9 +50,10 @@
 			<value>5242880</value>
 		</property>
 	</bean>
-	
+
 	<!-- 定义受环境影响易变的变量 -->
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
 		<property name="ignoreResourceNotFound" value="true" />
 		<property name="locations">
@@ -62,7 +63,7 @@
 			</list>
 		</property>
 	</bean>
-    
-    <!-- 加载其他配置文件 -->
-    <import resource="classpath:applicationContext/applicationContext-*.xml"/>
+	
+	<!-- 加载其他配置文件 -->
+	<import resource="classpath:applicationContext/applicationContext-*.xml" />
 </beans>  

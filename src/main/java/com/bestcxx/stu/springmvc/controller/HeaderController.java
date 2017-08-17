@@ -13,13 +13,14 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/header")
 public class HeaderController {
 	
-	@RequestMapping(value="/get/auto_token",method={RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value="/get/auto_token",method={RequestMethod.GET,RequestMethod.POST,RequestMethod.OPTIONS})
 	public ModelAndView getHeader(@RequestHeader HttpHeaders headers,HttpServletRequest request){
 		
 		ModelAndView mdv=new ModelAndView();
 		mdv.setViewName("header");
-		mdv.addObject("headerFrom",headers.getFirst("Accept"));
-		mdv.addObject("requestFrom",request.getHeader("Accept"));
+		mdv.addObject("headerFrom",headers.getFirst("Accept-Encoding"));//获取header的内容
+		String requestURI=request.getRequestURI();
+		mdv.addObject("requestFrom",requestURI.substring(requestURI.indexOf("/", 2), requestURI.length()));//获取路径  /header/get/auto_token
 		return mdv;
 	}
 }
