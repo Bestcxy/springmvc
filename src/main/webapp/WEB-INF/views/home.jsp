@@ -26,6 +26,9 @@
 	<br>
 	输入信息并移开鼠标：<input class="checkUserName" id="userName" name="userName" type="text">
 	<span class="col_msgspan"></span>
-	
+	<h2>测试获取header</h2>
+	测试名称：get方式请求后台，获取header
+	请求描述：后台获取header的值
+	测试路径:<a href="http://localhost:8085/springmvc/header/get/auto_token" target="_blank">http://localhost:8085/springmvc/header/get/auto_token</a>
 </body>
 </html>

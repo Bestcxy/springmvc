@@ -33,5 +33,12 @@ public class SwitchTest {
 		}
 		
 	}
+	
+	@Test
+	public void test2(){
+		int num=0;
+		System.out.println(num == 0 ? 0 : num - 1);
+	}
+	
 
 }
