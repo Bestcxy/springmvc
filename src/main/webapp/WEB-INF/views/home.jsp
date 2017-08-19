@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,5 +34,11 @@
 	测试名称：get方式请求后台，获取header
 	请求描述：后台获取header的值
 	测试路径:<a href="http://localhost:8085/springmvc/header/get/auto_token" target="_blank">http://localhost:8085/springmvc/header/get/auto_token</a>
+	<h2>form表单提交测试</h2>
+	<form action="<%=basePath%>parameterController/model" method="post">
+		<input name="userName" id="userName">
+		<input type="submit" value="提交">
+	</form>
+
 </body>
 </html>

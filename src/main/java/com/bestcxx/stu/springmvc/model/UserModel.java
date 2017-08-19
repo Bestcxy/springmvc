@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 /**
  * 
@@ -26,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class UserModel implements Serializable{
 	
 	private static final long serialVersionUID = -2443619924488167195L;
+	@Size(min=5,message="长度不能小于5")
 	private String userName;
 	private String passWord;
 	private Date createDate;

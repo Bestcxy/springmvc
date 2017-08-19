@@ -1,12 +1,19 @@
 package com.bestcxx.stu.springmvc.controller;
 
-import java.util.Date;
+import java.lang.ProcessBuilder.Redirect;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
 
+import org.apache.camel.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessageType;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +28,7 @@ import com.bestcxx.stu.springmvc.service.UserModelService;
 @Controller
 @RequestMapping("/parameterController")
 public class ParameterController {
+
 	@Autowired
 	private UserModelService userService;
 	
@@ -80,5 +88,16 @@ public class ParameterController {
 		
 		
 		return a;
+	}
+	
+	@RequestMapping(value="/model",method={RequestMethod.GET,RequestMethod.POST})
+	public String model(@Valid @ModelAttribute UserModel usermodel,BindingResult bindingResult){
+		System.out.println("有userName吗："+usermodel.getUserName());
+		if(bindingResult.hasErrors()){
+			System.out.println("校验生效了："+bindingResult.getFieldError());
+		}else{
+			System.out.println("不输出任何");
+		}
+		return "redirect:/home";
 	}
 }

@@ -21,6 +21,7 @@ public class WaitNotifyTest {
 						System.out.println(System.currentTimeMillis()+" "+Thread.currentThread().getName()+"开始等待 intNum="+userModel.getIntNum());
 						
 						userModel.wait();
+						
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -41,6 +42,7 @@ public class WaitNotifyTest {
 					userModel.setIntNum(2);
 					System.out.println(System.currentTimeMillis()+" "+Thread.currentThread().getName()+"运行结束 intNum="+userModel.getIntNum());
 					userModel.notify();
+					
 					System.out.println(System.currentTimeMillis()+" "+Thread.currentThread().getName()+"notify后继续运行结束 intNum="+userModel.getIntNum());
 					
 				}
