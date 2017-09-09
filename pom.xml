@@ -29,6 +29,7 @@
                     <source>1.7</source>  
                     <target>1.7</target>  
                     <uriEncoding>${project.build.sourceEncoding}</uriEncoding>  
+                    <warName>springmvc</warName><!-- war包名字 -->
                 </configuration>  
             </plugin>  
   
