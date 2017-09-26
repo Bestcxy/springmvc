@@ -1,18 +1,15 @@
 package com.bestcxx.stu.springmvc.controller;
 
-import java.lang.ProcessBuilder.Redirect;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import javax.validation.constraints.Size;
-
-import org.apache.camel.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessageType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -90,14 +87,32 @@ public class ParameterController {
 		return a;
 	}
 	
+	/**
+	 * 对于实体校验
+	 *  @Valid @ModelAttribute BindingResult bindingResult
+	 *  bindingResult.hasErrors()
+	 *  List<ObjectError> ls=bindingResult.getAllErrors();
+	 *  ls.get(i).getDefaultMessage()
+	 * @param usermodel
+	 * @param bindingResult
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
 	@RequestMapping(value="/model",method={RequestMethod.GET,RequestMethod.POST})
-	public String model(@Valid @ModelAttribute UserModel usermodel,BindingResult bindingResult){
+	public HashMap<String,Object> model(@Valid @ModelAttribute("usermodel") UserModel usermodel,BindingResult bindingResult){
 		System.out.println("有userName吗："+usermodel.getUserName());
-		if(bindingResult.hasErrors()){
-			System.out.println("校验生效了："+bindingResult.getFieldError());
-		}else{
-			System.out.println("不输出任何");
-		}
-		return "redirect:/home";
+		HashMap<String,Object> map=new HashMap<String,Object>();
+		if(bindingResult.hasErrors()){  
+            List<ObjectError> ls=bindingResult.getAllErrors();  
+            for (int i = 0; i < ls.size(); i++) {
+                System.out.println("error:"+ls.get(i));
+                map.put("result", "WRONG");
+                map.put("msg",ls.get(i).getDefaultMessage());
+                return map;
+            }  
+        }
+		map.put("result", "OK");
+		return map;
 	}
 }

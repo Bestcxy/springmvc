@@ -6,6 +6,8 @@ import java.util.Date;
 
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 /**
  * 
@@ -28,7 +30,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class UserModel implements Serializable{
 	
 	private static final long serialVersionUID = -2443619924488167195L;
-	@Size(min=5,message="长度不能小于5")
+	/**使用 notblank 是不允许空字符串的*/
+	@Size(min=5,message="userName 长度不能小于5")
+	@NotBlank(message="userName 不允许为空，或者空字符串")
 	private String userName;
 	private String passWord;
 	private Date createDate;
