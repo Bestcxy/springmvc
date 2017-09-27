@@ -65,5 +65,10 @@
 	</bean>
 	
 	<!-- 加载其他配置文件 -->
-	<import resource="classpath:applicationContext/applicationContext-*.xml" />
+	<!-- <import resource="classpath:applicationContext/applicationContext-*.xml" /> -->
+	<import resource="classpath:applicationContext/applicationContext-bean.xml" />
+	<import resource="classpath:applicationContext/applicationContext-dao.xml" />
+	<!-- <import resource="classpath:applicationContext/applicationContext-jms.xml" />
+	<import resource="classpath:applicationContext/applicationContext-quartz.xml" /> -->
+	<import resource="classpath:applicationContext/applicationContext-trans.xml" />
 </beans>  

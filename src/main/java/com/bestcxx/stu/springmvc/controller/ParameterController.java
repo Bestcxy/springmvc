@@ -87,32 +87,5 @@ public class ParameterController {
 		return a;
 	}
 	
-	/**
-	 * 对于实体校验
-	 *  @Valid @ModelAttribute BindingResult bindingResult
-	 *  bindingResult.hasErrors()
-	 *  List<ObjectError> ls=bindingResult.getAllErrors();
-	 *  ls.get(i).getDefaultMessage()
-	 * @param usermodel
-	 * @param bindingResult
-	 * @param request
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value="/model",method={RequestMethod.GET,RequestMethod.POST})
-	public HashMap<String,Object> model(@Valid @ModelAttribute("usermodel") UserModel usermodel,BindingResult bindingResult){
-		System.out.println("有userName吗："+usermodel.getUserName());
-		HashMap<String,Object> map=new HashMap<String,Object>();
-		if(bindingResult.hasErrors()){  
-            List<ObjectError> ls=bindingResult.getAllErrors();  
-            for (int i = 0; i < ls.size(); i++) {
-                System.out.println("error:"+ls.get(i));
-                map.put("result", "WRONG");
-                map.put("msg",ls.get(i).getDefaultMessage());
-                return map;
-            }  
-        }
-		map.put("result", "OK");
-		return map;
-	}
+	
 }

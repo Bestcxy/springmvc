@@ -69,8 +69,8 @@
     	<!-- 定义根日志类别  查看level http://blog.csdn.net/techq/article/details/6636287--> 
         <Root level="trace">  
             <AppenderRef ref="toConsole" />
-            <AppenderRef ref="databaseAppender"/>
-            <AppenderRef ref="toFile"/>
+           <!--  <AppenderRef ref="databaseAppender"/>
+            <AppenderRef ref="toFile"/> -->
             
         </Root>
         <!-- 使用过滤器 -->
