@@ -10,7 +10,7 @@
        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
        <!-- spring 4.0.0 -->  
        <!-- 设置spring版本 -->  
-       <springframework.version>4.3.0.RELEASE</springframework.version>  
+       <springframework.version>4.3.17.RELEASE</springframework.version>  
        <!-- 设置jackson版本 -->
        <jackson.version>2.9.8</jackson.version>
    </properties>
