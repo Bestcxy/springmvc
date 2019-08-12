@@ -39,15 +39,16 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-	<!--配置上下文载入器-->
-	<!--上下文载入器载入除 DispatcherServlet 载入的配置文件之外的其他上下文配置文件-->
 	<!--最常见的上下文载入器是一个 servlet 监听器,其名称为 ContextLoaderListener,其实现了 ServletContextListener 接口
- 		,开发者可以在为客户端请求提供服务前向 servletContext 中添加任意的对象. 
-		ContextLoaderListener 对象在 ServletContext 整个运行期间都是可见的.
-		ContextLoaderListener 默认加载文件为 ContextLoader.properties-->
+             ,开发者可以在为客户端请求提供服务前向 servletContext 中添加任意的对象.
+            ContextLoaderListener 对象在 ServletContext 整个运行期间都是可见的.
+            ContextLoaderListener 默认加载文件为 ContextLoader.properties。
+            必须添加配置文件 WEB-INF/applicationContext.xml -->
+	<!--
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	-->
 	
 	
 	
