@@ -46,7 +46,7 @@
 		ContextLoaderListener 对象在 ServletContext 整个运行期间都是可见的.
 		ContextLoaderListener 默认加载文件为 ContextLoader.properties-->
 	<listener>
-		<listener-class>org.Springframework.web.context.ContextLoaderListener></listener-class>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
 	
