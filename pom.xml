@@ -12,7 +12,7 @@
        <!-- 设置spring版本 -->  
        <springframework.version>4.3.17.RELEASE</springframework.version>  
        <!-- 设置jackson版本 -->
-       <jackson.version>2.9.8</jackson.version>
+       <jackson.version>2.10.1</jackson.version>
    </properties>
    
     <build>  
